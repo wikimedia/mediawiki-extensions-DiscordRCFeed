@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Justman10000",
+			"TMg"
+		]
+	},
+	"discordrcfeed-desc": "Bietet RCFeedEngine und RCFeedFormatter für Discord.",
+	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|hat}} eine kleine Änderung am Artikel $3 vorgenommen",
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|hat}} den Artikel $3 bearbeitet",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|hat}} eine kleine Änderung am Artikel $3 vorgenommen",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|hat}} eine kleine Änderung am Artikel $3 vorgenommen"
+}

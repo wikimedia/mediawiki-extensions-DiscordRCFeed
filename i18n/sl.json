@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"discordrcfeed-desc": "Zagotavlja RCFeedEngine in RCFeedFormatter za Discord.",
+	"discordrcfeed-line-edit-minor": "$1 je {{GENDER:$2|opravil|opravila|opravil_a}} manjše urejanje članka $3",
+	"discordrcfeed-line-edit": "$1 je {{GENDER:$2|uredil|uredila|uredil_a}} članek $3",
+	"discordrcfeed-line-edit-minor-bot": "$1 je {{GENDER:$2|opravil|opravila|opravil_a}} manjše urejanje članka $3",
+	"discordrcfeed-line-edit-bot": "$1 je {{GENDER:$2|opravil|opravila|opravil_a}} manjše urejanje članka $3"
+}

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nokeoo"
+		]
+	},
+	"discordrcfeed-desc": "Suteikia Discord RCFeedEngine ir RCFeedFormatter",
+	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|atliko}} nedidelį straipsnio $3 pakeitimą",
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|redagavo}} straipsnį $3",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|atliko}} nedidelį straipsnio $3 pakeitimą",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|atliko}} nedidelį straipsnio $3 pakeitimą"
+}

@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meno25",
+			"أيوب"
+		]
+	},
+	"discordrcfeed-desc": "يوفر RCFeedEngine و RCFeedFormatter لـ Discord.",
+	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2| إجراء}} تعديل طفيف على المقالة $3",
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|عدل|عدلت}} مقالة $3",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2| إجراء}} تعديل طفيف على المقالة $3",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2| إجراء}} تعديل طفيف على المقالة $3"
+}

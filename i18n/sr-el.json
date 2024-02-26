@@ -1,0 +1,7 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"discordrcfeed-line-edit-minor": "$1 je {{GENDER:$2|napravio|napravila}} manju izmenu članka $3",
+	"discordrcfeed-line-edit": "$1 je {{GENDER:$2|napravio|napravila}} izmenu članka $3"
+}

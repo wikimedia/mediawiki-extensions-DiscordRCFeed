@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Winston Sung"
+		]
+	},
+	"discordrcfeed-line-edit-minor": "$1 je {{GENDER:$2|napravio|napravila}} manju izmjenu članka $3",
+	"discordrcfeed-line-edit": "$1 je {{GENDER:$2|napravio|napravila}} izmjenu članka $3",
+	"discordrcfeed-line-edit-minor-bot": "$1 je {{GENDER:$2|napravio|napravila}} manju izmjenu članka $3",
+	"discordrcfeed-line-edit-bot": "$1 je {{GENDER:$2|napravio|napravila}} manju izmjenu članka $3"
+}

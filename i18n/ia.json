@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"discordrcfeed-desc": "Forni RCFeedEngine e RCFeedFormatter pro Discord.",
+	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|ha facite}} un modification minor del articulo $3",
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|ha modificate}} le articulo $3",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|ha facite}} un modification minor del articulo $3",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|ha facite}} un modification minor del articulo $3"
+}

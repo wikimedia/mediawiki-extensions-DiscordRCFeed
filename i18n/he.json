@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amire80"
+		]
+	},
+	"discordrcfeed-desc": "אספקת RCFeedEngine ו־RCFeedFormatter בשביל דיסקורד.",
+	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|עשה|עשתה}} עריכה משנית בערך $3",
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|ערך|ערכה}} את הערך $3",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|עשה|עשתה}} עריכה משנית בערך $3",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|עשה|עשתה}} עריכה משנית בערך $3"
+}

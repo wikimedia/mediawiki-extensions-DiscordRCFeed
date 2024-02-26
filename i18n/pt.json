@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hamilton Abreu"
+		]
+	},
+	"discordrcfeed-desc": "Fornece RCFeedEngine e RCFeedFormatter para Discord.",
+	"discordrcfeed-line-edit-minor": "$1 realizou uma edição menor no artigo $3{{GENDER:$2|}}",
+	"discordrcfeed-line-edit": "$1 editou o artigo $3{{GENDER:$2|}}",
+	"discordrcfeed-line-edit-minor-bot": "$1 realizou uma edição menor no artigo $3{{GENDER:$2|}}",
+	"discordrcfeed-line-edit-bot": "$1 realizou uma edição menor no artigo $3{{GENDER:$2|}}"
+}
