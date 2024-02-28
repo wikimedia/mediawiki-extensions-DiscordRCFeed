@@ -6,5 +6,7 @@
 	},
 	"discordrcfeed-desc": "Dèje RCFeedEngine e RCFeedFormatter pe Discord.",
 	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|ave fatte}} cangiamiende stuèdeche pa vôsce $3",
-	"discordrcfeed-line-edit": "$1 {{GENDER:$2|ave cangiate}} 'a vôsce $3"
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|ave cangiate}} 'a vôsce $3",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|ave fatte}} cangiamiende stuèdeche pa vôsce $3",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|ave fatte}} cangiamiende stuèdeche pa vôsce $3"
 }
