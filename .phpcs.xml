@@ -1,8 +1,6 @@
 <?xml version="1.0" ?>
 <ruleset>
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki" />
-	<rule ref="./vendor/phpcompatibility/php-compatibility/PHPCompatibility" />
-	<config name="testVersion" value="8.0-8.1" />
 	<rule ref="Squiz.Strings.DoubleQuoteUsage.NotRequired" />
 	<file>.</file>
 	<arg name="extensions" value="php" />
