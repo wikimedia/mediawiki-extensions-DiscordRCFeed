@@ -10,6 +10,7 @@ use RecentChange;
 
 /**
  * @group DiscordRCFeed
+ * @group Database
  *
  * @covers \MediaWiki\Extension\DiscordRCFeed\DiscordRCFeedEngine
  */
