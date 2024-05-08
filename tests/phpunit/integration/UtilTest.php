@@ -80,14 +80,13 @@ class UtilTest extends MediaWikiIntegrationTestCase {
 		];
 		$mock = $this->createMock( MessageCache::class );
 		$mock->method( 'get' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				static function ( $key, $useDB, $lang ) use ( $msgMap ) {
 					return $msgMap[$lang->getCode()][$key] ?? false;
 				}
-			)
-		);
+			);
 		$mock->method( 'transform' )
-			->will( $this->returnArgument( 0 ) );
+			->willReturnArgument( 0 );
 		$this->setService( 'MessageCache', $mock );
 
 		$msg = Util::msgText( 'test-prefix-block-block' );

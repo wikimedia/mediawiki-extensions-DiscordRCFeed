@@ -343,13 +343,13 @@ class DiscordLinkerTest extends MediaWikiIntegrationTestCase {
 
 		$revision = $this->createMock( RevisionRecord::class );
 		$revision->method( 'getParentId' )
-			->will( $this->returnValue( $isRoot ? null : 10 ) );
+			->willReturn( $isRoot ? null : 10 );
 		$revision->method( 'getId' )
-			->will( $this->returnValue( 11 ) );
+			->willReturn( 11 );
 
 		$store = $this->createMock( RevisionStore::class );
 		$store->method( 'getRevisionByTitle' )
-			->will( $this->returnValue( $revision ) );
+			->willReturn( $revision );
 		$this->setService( 'RevisionStore', $store );
 
 		return $title;

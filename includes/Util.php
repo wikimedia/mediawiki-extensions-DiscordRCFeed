@@ -97,6 +97,7 @@ final class Util {
 			// @phan-suppress-next-line PhanUndeclaredMethod, PhanUndeclaredStaticMethod
 			return $userFactory->newFromUserIdentity( $rc->getPerformerIdentity() );
 		} else {
+			// @phan-suppress-next-line PhanUndeclaredMethod
 			return $rc->getPerformer();
 		}
 	}

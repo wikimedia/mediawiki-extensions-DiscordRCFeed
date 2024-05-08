@@ -1,7 +1,6 @@
 node_modules/
 .eslintcache
 # We use yarn instead of npm
-package-lock.json
 
 # composer dependencies
 /vendor/

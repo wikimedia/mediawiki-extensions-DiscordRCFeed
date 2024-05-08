@@ -339,14 +339,13 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 		];
 		$mock = $this->createMock( MessageCache::class );
 		$mock->method( 'get' )
-			->will( $this->returnCallback(
+			->willReturnCallback(
 				static function ( $key, $useDB, $lang ) use ( $msgMap ) {
 					return $msgMap[$key] ?? false;
 				}
-			)
-		);
+			);
 		$mock->method( 'transform' )
-			->will( $this->returnArgument( 0 ) );
+			->willReturnArgument( 0 );
 		$this->setService( 'MessageCache', $mock );
 
 		$emoji = $this->wrapper->getEmojiForKeys( 'test-emoji', $mainKey, $subKey, $fallback );
