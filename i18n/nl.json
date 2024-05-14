@@ -1,9 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mainframe98"
+			"Mainframe98",
+			"McDutchie"
 		]
 	},
+	"discordrcfeed-desc": "Levert RCFeedEngine en RCFeedFormatter voor Discord.",
 	"discordrcfeed-line-edit-minor": "$1 heeft een kleine bewerking aan pagina $3 {{GENDER:$2|gemaakt}}",
-	"discordrcfeed-line-edit": "$1 heeft pagina $3 {{GENDER:$2|bewerkt}}"
+	"discordrcfeed-line-edit": "$1 heeft pagina $3 {{GENDER:$2|bewerkt}}",
+	"discordrcfeed-line-edit-minor-bot": "$1 heeft een kleine bewerking aan pagina $3 {{GENDER:$2|gemaakt}}",
+	"discordrcfeed-line-edit-bot": "$1 heeft een kleine bewerking aan pagina $3 {{GENDER:$2|gemaakt}}"
 }
