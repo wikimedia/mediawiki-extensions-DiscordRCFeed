@@ -3,7 +3,6 @@
 namespace MediaWiki\Extension\DiscordRCFeed;
 
 use FatalError;
-use Linker;
 use LogFormatter;
 use MediaWiki\MediaWikiServices;
 use Message;
@@ -91,9 +90,11 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 
 		$desc = $this->getDescription( $rc );
 
+		$services = MediaWikiServices::getInstance();
+
 		if ( in_array( $rcType, [ RC_EDIT, RC_NEW ] ) ) {
 			$color = Constants::COLOR_MAP_ACTION[$rcType] ?? Constants::COLOR_DEFAULT;
-			$store = MediaWikiServices::getInstance()->getCommentStore();
+			$store = $services->getCommentStore();
 			$comment = $store->getComment( 'rc_comment', $attribs )->text;
 		} elseif ( $rcType == RC_LOG ) {
 			$color = Constants::COLOR_MAP_LOG[$attribs['rc_log_type']] ?? Constants::COLOR_MAP_ACTION[RC_LOG];
@@ -105,7 +106,8 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 			return null;
 		}
 		if ( $comment ) {
-			$comment = Linker::formatComment( $comment, $this->title );
+			$formatter = $services->getCommentFormatter();
+			$comment = $formatter->format( $comment, $this->title, false, null );
 			$comment = $this->converter->convert( $comment, true );
 		}
 
