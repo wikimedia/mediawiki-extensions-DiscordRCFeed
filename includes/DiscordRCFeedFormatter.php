@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\DiscordRCFeed;
 
 use FatalError;
 use LogFormatter;
+use LogFormatterFactory;
 use MediaWiki\MediaWikiServices;
 use Message;
 use RCFeedFormatter;
@@ -216,7 +217,12 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 				$attribs['rc_actor'] = $actorStore->findActorIdByName( $attribs['rc_user_text'], $db );
 			}
 		}
-		$formatter = LogFormatter::newFromRow( $attribs );
+		if ( class_exists( LogFormatterFactory::class ) ) {
+			// MW 1.42+
+			$formatter = MediaWikiServices::getInstance()->getLogFormatterFactory()->newFromRow( $attribs );
+		} else {
+			$formatter = LogFormatter::newFromRow( $attribs );
+		}
 		$formatter->setContext( Util::getContentLanguageContext() );
 		if ( $this->style == self::STYLE_STRUCTURE ) {
 			// description for structure style is plaintext and does not contain links.
