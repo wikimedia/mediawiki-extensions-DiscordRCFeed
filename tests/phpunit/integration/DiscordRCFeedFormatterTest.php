@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\DiscordRCFeed\Tests\Integration;
 
 use MediaWiki\Extension\DiscordRCFeed\DiscordRCFeedFormatter;
 use MediaWiki\Extension\DiscordRCFeed\FeedSanitizer;
+use MediaWiki\MainConfigNames;
 use MediaWikiIntegrationTestCase;
 use MessageCache;
 use RecentChange;
@@ -135,12 +136,12 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 		array $feed
 	) {
 		if ( $sitename ) {
-			$this->setMwGlobals( 'wgSitename', $sitename );
+			$this->overrideConfigValue( MainConfigNames::Sitename, $sitename );
 		}
-		$this->setMwGlobals( [
-			'wgServer' => 'https://foo.bar',
-			'wgArticlePath' => '/index.php/$1',
-			'wgScript' => '/index.php'
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => 'https://foo.bar',
+			MainConfigNames::ArticlePath => '/index.php/$1',
+			MainConfigNames::Script => '/index.php',
 		] );
 		$defaultParams = [
 			'style' => DiscordRCFeedFormatter::STYLE_EMBED,

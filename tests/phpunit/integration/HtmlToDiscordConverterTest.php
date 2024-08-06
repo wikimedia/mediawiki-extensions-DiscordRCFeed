@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\DiscordRCFeed\Tests\Integration;
 
 use ExtensionRegistry;
 use MediaWiki\Extension\DiscordRCFeed\HtmlToDiscordConverter;
+use MediaWiki\MainConfigNames;
 use MediaWikiIntegrationTestCase;
 use Title;
 use Wikimedia\TestingAccessWrapper;
@@ -71,10 +72,10 @@ class HtmlToDiscordConverterTest extends MediaWikiIntegrationTestCase {
 	 * @covers \MediaWiki\Extension\DiscordRCFeed\HtmlToDiscordConverter::convert
 	 */
 	public function testConvert( $expected, $html ) {
-		$this->setMwGlobals( [
-			'wgServer' => 'http://f.oo',
-			'wgArticlePath' => '/index.php/$1',
-			'wgScript' => '/index.php'
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => 'http://f.oo',
+			MainConfigNames::ArticlePath => '/index.php/$1',
+			MainConfigNames::Script => '/index.php',
 		] );
 		$this->assertSame(
 			$expected,
@@ -98,10 +99,10 @@ class HtmlToDiscordConverterTest extends MediaWikiIntegrationTestCase {
 	 * @covers \MediaWiki\Extension\DiscordRCFeed\HtmlToDiscordConverter::convertUserName
 	 */
 	public function testConvertUserName( $expected, $params, $message = '' ) {
-		$this->setMwGlobals( [
-			'wgServer' => 'https://foo.bar',
-			'wgArticlePath' => '/index.php/$1',
-			'wgScript' => '/index.php'
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => 'https://foo.bar',
+			MainConfigNames::ArticlePath => '/index.php/$1',
+			MainConfigNames::Script => '/index.php',
 		] );
 		$this->assertSame(
 			$expected,
@@ -157,10 +158,10 @@ class HtmlToDiscordConverterTest extends MediaWikiIntegrationTestCase {
 	 * @covers \MediaWiki\Extension\DiscordRCFeed\HtmlToDiscordConverter::convertTitleLinks
 	 */
 	public function testConvertTitleLinks( $expected, $params, $articlePath, $message = '' ) {
-		$this->setMwGlobals( [
-			'wgServer' => 'https://foo.bar',
-			'wgArticlePath' => $articlePath,
-			'wgScript' => '/index.php'
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => 'https://foo.bar',
+			MainConfigNames::ArticlePath => $articlePath,
+			MainConfigNames::Script => '/index.php',
 		] );
 		$this->assertSame(
 			$expected,
@@ -192,10 +193,10 @@ class HtmlToDiscordConverterTest extends MediaWikiIntegrationTestCase {
 	 * @covers \MediaWiki\Extension\DiscordRCFeed\HtmlToDiscordConverter::convertLinks
 	 */
 	public function testConvertLinks( $expected, $params, $message = '' ) {
-		$this->setMwGlobals( [
-			'wgServer' => 'https://foo.bar',
-			'wgArticlePath' => '/index.php/$1',
-			'wgScript' => '/index.php'
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => 'https://foo.bar',
+			MainConfigNames::ArticlePath => '/index.php/$1',
+			MainConfigNames::Script => '/index.php',
 		] );
 		$this->assertSame(
 			$expected,
