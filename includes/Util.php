@@ -79,12 +79,7 @@ final class Util {
 	 * @return Title|null
 	 */
 	public static function getTitleFromRC( RecentChange $rc ) {
-		if ( defined( 'MW_VERSION' ) && version_compare( MW_VERSION, '1.37', '>=' ) ) {
-			// @phan-suppress-next-line PhanUndeclaredMethod, PhanUndeclaredStaticMethod
-			return Title::castFromPageReference( $rc->getPage() );
-		} else {
-			return $rc->getTitle();
-		}
+		return Title::castFromPageReference( $rc->getPage() );
 	}
 
 	/**
@@ -92,13 +87,7 @@ final class Util {
 	 * @return User
 	 */
 	public static function getPerformerFromRC( RecentChange $rc ) {
-		if ( defined( 'MW_VERSION' ) && version_compare( MW_VERSION, '1.37', '>=' ) ) {
-			$userFactory = MediaWikiServices::getInstance()->getUserFactory();
-			// @phan-suppress-next-line PhanUndeclaredMethod, PhanUndeclaredStaticMethod
-			return $userFactory->newFromUserIdentity( $rc->getPerformerIdentity() );
-		} else {
-			// @phan-suppress-next-line PhanUndeclaredMethod
-			return $rc->getPerformer();
-		}
+		$userFactory = MediaWikiServices::getInstance()->getUserFactory();
+		return $userFactory->newFromUserIdentity( $rc->getPerformerIdentity() );
 	}
 }
