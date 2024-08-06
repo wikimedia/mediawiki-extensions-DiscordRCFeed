@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\DiscordRCFeed;
 
 use MediaWiki\Logger\LoggerFactory;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use Message;
 use MessageSpecifier;
@@ -45,8 +46,8 @@ final class Util {
 	 * @return bool
 	 */
 	public static function urlIsLocal( string $url ): bool {
-		global $wgServer;
-		$server = wfParseUrl( $wgServer );
+		$config = MediaWikiServices::getInstance()->getMainConfig();
+		$server = wfParseUrl( $config->get( MainConfigNames::Server ) );
 		$url = wfParseUrl( $url );
 		$bitNames = [
 			'scheme',
