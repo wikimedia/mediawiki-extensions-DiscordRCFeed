@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\DiscordRCFeed\Tests\Integration;
 
 use MediaWiki\Extension\DiscordRCFeed\Util;
+use MediaWiki\MainConfigNames;
 use MediaWikiIntegrationTestCase;
 use MessageCache;
 use RequestContext;
@@ -49,7 +50,7 @@ class UtilTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testUrlIsLocal( $expected, $url, $server = '', $message = '' ) {
 		if ( $server ) {
-			$this->setMwGlobals( 'wgServer', $server );
+			$this->overrideConfigValue( MainConfigNames::Server, $server );
 		}
 		$this->assertEquals(
 			$expected,
@@ -92,7 +93,7 @@ class UtilTest extends MediaWikiIntegrationTestCase {
 		$msg = Util::msgText( 'test-prefix-block-block' );
 		$this->assertNotEmpty( $msg, 'should return not empty value when valid key is given' );
 		$this->assertIsString( $msg, 'should return string value' );
-		$this->setMwGlobals( 'wgLanguageCode', 'ko' );
+		$this->overrideConfigValue( MainConfigNames::LanguageCode, 'ko' );
 		$msg = Util::msgText( 'test-prefix-block-block' );
 		$this->assertSame( 'A가 B를 차단했습니다.', $msg, 'should return message in the content language' );
 	}

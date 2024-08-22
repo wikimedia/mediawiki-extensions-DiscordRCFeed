@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\DiscordRCFeed\Tests\Integration;
 
 use MediaWiki\Extension\DiscordRCFeed\DiscordLinker;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
 use MediaWikiIntegrationTestCase;
@@ -80,7 +81,7 @@ class DiscordLinkerTest extends MediaWikiIntegrationTestCase {
 			'User tools should be in the content language' => [
 				'[Foo](https://foo.bar/index.php/Usuario:Foo) '
 				. '([IP Block](https://foo.bar/index.php/Especial:Bloquear/Foo))',
-				[ 'wgLanguageCode' => 'es' ],
+				[ MainConfigNames::LanguageCode => 'es' ],
 				[
 					[
 						'target' => 'special',
@@ -99,15 +100,15 @@ class DiscordLinkerTest extends MediaWikiIntegrationTestCase {
 	 */
 	public function testMakeUserTextWithTools(
 		string $expected,
-		array $globals,
+		array $configValues,
 		array $userTools,
 		string $name
 	) {
-		$globals += [
-			'wgServer' => 'https://foo.bar',
-			'wgArticlePath' => '/index.php/$1',
+		$configValues += [
+			MainConfigNames::Server => 'https://foo.bar',
+			MainConfigNames::ArticlePath => '/index.php/$1',
 		];
-		$this->setMwGlobals( $globals );
+		$this->overrideConfigValues( $configValues );
 		$linkRenderer = new DiscordLinker( $userTools );
 		$user = new User();
 		$user->setName( $name );
@@ -140,9 +141,9 @@ class DiscordLinkerTest extends MediaWikiIntegrationTestCase {
 		array $userTools,
 		string $name
 	) {
-		$this->setMwGlobals( [
-			'wgServer' => 'https://foo.bar',
-			'wgArticlePath' => '/index.php/$1',
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => 'https://foo.bar',
+			MainConfigNames::ArticlePath => '/index.php/$1',
 		] );
 		$linkRenderer = new DiscordLinker( $userTools );
 		$user = new User();
@@ -204,10 +205,10 @@ class DiscordLinkerTest extends MediaWikiIntegrationTestCase {
 		array $pageTools,
 		string $titleText
 	) {
-		$this->setMwGlobals( [
-			'wgServer' => 'https://foo.bar',
-			'wgArticlePath' => '/index.php/$1',
-			'wgScript' => '/index.php'
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => 'https://foo.bar',
+			MainConfigNames::ArticlePath => '/index.php/$1',
+			MainConfigNames::Script => '/index.php',
 		] );
 		$linkRenderer = new DiscordLinker( null, $pageTools );
 		$page = $this->getExistingTestPage( $titleText );
@@ -276,10 +277,10 @@ class DiscordLinkerTest extends MediaWikiIntegrationTestCase {
 		string $titleText,
 		array $params
 	) {
-		$this->setMwGlobals( [
-			'wgServer' => 'https://foo.bar',
-			'wgArticlePath' => '/index.php/$1',
-			'wgScript' => '/index.php'
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => 'https://foo.bar',
+			MainConfigNames::ArticlePath => '/index.php/$1',
+			MainConfigNames::Script => '/index.php',
 		] );
 		$title = Title::newFromText( $titleText );
 
@@ -322,10 +323,10 @@ class DiscordLinkerTest extends MediaWikiIntegrationTestCase {
 	 * @covers \MediaWiki\Extension\DiscordRCFeed\DiscordLinker::makePageTextWithTools
 	 */
 	public function testDiffPageTool( $expected, $titleIsRoot ) {
-		$this->setMwGlobals( [
-			'wgServer' => 'https://foo.bar',
-			'wgArticlePath' => '/index.php/$1',
-			'wgScript' => '/index.php'
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => 'https://foo.bar',
+			MainConfigNames::ArticlePath => '/index.php/$1',
+			MainConfigNames::Script => '/index.php',
 		] );
 		$diffTool = [
 			'target' => 'diff',
