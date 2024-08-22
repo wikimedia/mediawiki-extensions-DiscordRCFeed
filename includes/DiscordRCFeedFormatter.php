@@ -5,6 +5,7 @@ namespace MediaWiki\Extension\DiscordRCFeed;
 use FatalError;
 use LogFormatter;
 use LogFormatterFactory;
+use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
 use Message;
 use RCFeedFormatter;
@@ -324,7 +325,6 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 		$desc = null,
 		$comment = null
 	): string {
-		global $wgSitename;
 		$performer = $this->performer;
 		$title = $this->title;
 		$style = $this->style;
@@ -343,7 +343,8 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 		] ) );
 
 		$post = [
-			'username' => $wgSitename,
+			'username' => MediaWikiServices::getInstance()->getMainConfig()
+				->get( MainConfigNames::Sitename ),
 		];
 		switch ( $style ) {
 			case self::STYLE_EMBED:
