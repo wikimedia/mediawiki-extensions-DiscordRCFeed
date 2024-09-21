@@ -210,7 +210,7 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 		if ( !isset( $attribs['rc_actor'] ) ) {
 			$actorStore = MediaWikiServices::getInstance()->getActorStore();
 			$userFactory = MediaWikiServices::getInstance()->getUserFactory();
-			$db = wfGetDB( DB_REPLICA );
+			$db = MediaWikiServices::getInstance()->getDBLoadBalancer()->getConnection( DB_REPLICA );
 			if ( isset( $attribs['rc_user'] ) && $attribs['rc_user'] !== 0 ) {
 				$user = $userFactory->newFromId( $attribs['rc_user'] )->getUser();
 				$attribs['rc_actor'] = $actorStore->findActorId( $user, $db );
