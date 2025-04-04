@@ -5,8 +5,8 @@ namespace MediaWiki\Extension\DiscordRCFeed\Tests\Integration;
 use ExtensionRegistry;
 use MediaWiki\Extension\DiscordRCFeed\HtmlToDiscordConverter;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use Wikimedia\TestingAccessWrapper;
 
 /**

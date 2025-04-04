@@ -6,8 +6,8 @@ use MediaWiki\Extension\DiscordRCFeed\DiscordLinker;
 use MediaWiki\MainConfigNames;
 use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Revision\RevisionStore;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use User;
 use Wikimedia\TestingAccessWrapper;
 

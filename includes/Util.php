@@ -5,12 +5,12 @@ namespace MediaWiki\Extension\DiscordRCFeed;
 use MediaWiki\Logger\LoggerFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use Message;
 use MessageSpecifier;
 use Psr\Log\LoggerInterface;
 use RecentChange;
 use RequestContext;
-use Title;
 use User;
 
 final class Util {

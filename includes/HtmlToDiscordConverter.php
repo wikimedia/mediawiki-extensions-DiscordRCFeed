@@ -2,8 +2,8 @@
 namespace MediaWiki\Extension\DiscordRCFeed;
 
 use ExtensionRegistry;
+use MediaWiki\Title\Title;
 use Sanitizer;
-use Title;
 use User;
 
 class HtmlToDiscordConverter {

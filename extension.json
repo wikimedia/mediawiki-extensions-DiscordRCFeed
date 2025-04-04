@@ -6,7 +6,7 @@
 	"descriptionmsg": "discordrcfeed-desc",
 	"type": "other",
 	"requires": {
-		"MediaWiki": ">= 1.39.0"
+		"MediaWiki": ">= 1.39.4"
 	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\DiscordRCFeed\\": "includes/"

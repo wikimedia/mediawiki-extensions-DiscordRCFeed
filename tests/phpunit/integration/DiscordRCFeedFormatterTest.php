@@ -5,10 +5,10 @@ namespace MediaWiki\Extension\DiscordRCFeed\Tests\Integration;
 use MediaWiki\Extension\DiscordRCFeed\DiscordRCFeedFormatter;
 use MediaWiki\Extension\DiscordRCFeed\FeedSanitizer;
 use MediaWiki\MainConfigNames;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use MessageCache;
 use RecentChange;
-use Title;
 use Wikimedia\TestingAccessWrapper;
 
 /**

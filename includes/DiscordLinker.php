@@ -2,8 +2,8 @@
 namespace MediaWiki\Extension\DiscordRCFeed;
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use SpecialPage;
-use Title;
 use User;
 
 class DiscordLinker {

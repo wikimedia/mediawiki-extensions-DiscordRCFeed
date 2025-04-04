@@ -7,10 +7,10 @@ use LogFormatter;
 use LogFormatterFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use Message;
 use RCFeedFormatter;
 use RecentChange;
-use Title;
 use User;
 
 class DiscordRCFeedFormatter implements RCFeedFormatter {
