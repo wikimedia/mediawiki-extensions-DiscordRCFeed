@@ -3,10 +3,13 @@
 		"authors": [
 			"Ciencia Al Poder",
 			"DDPAT",
-			"Ice bulldog"
+			"Ice bulldog",
+			"MatyGamingHD"
 		]
 	},
 	"discordrcfeed-desc": "Proporciona RCFeedEngine y RCFeedFormatter para Discord.",
 	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|hizo}} una edición menor en el artículo $3",
-	"discordrcfeed-line-edit": "$1 {{GENDER:$2|editó}} el artículo $3"
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|editó}} el artículo $3",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|hizo}} una edición menor en el artículo $3",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|hizo}} una edición menor en el artículo $3"
 }
