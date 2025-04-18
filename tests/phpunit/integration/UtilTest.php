@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\DiscordRCFeed\Tests\Integration;
 
 use MediaWiki\Extension\DiscordRCFeed\Util;
+use MediaWiki\Language\Language;
 use MediaWiki\MainConfigNames;
 use MediaWikiIntegrationTestCase;
 use MessageCache;
@@ -83,7 +84,10 @@ class UtilTest extends MediaWikiIntegrationTestCase {
 		$mock->method( 'get' )
 			->willReturnCallback(
 				static function ( $key, $useDB, $lang ) use ( $msgMap ) {
-					return $msgMap[$lang->getCode()][$key] ?? false;
+					if ( $lang instanceof Language ) {
+						$lang = $lang->getCode();
+					}
+					return $msgMap[$lang][$key] ?? false;
 				}
 			);
 		$mock->method( 'transform' )
