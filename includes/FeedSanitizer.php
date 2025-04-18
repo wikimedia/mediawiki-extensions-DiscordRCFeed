@@ -2,8 +2,6 @@
 
 namespace MediaWiki\Extension\DiscordRCFeed;
 
-use MediaWiki\MainConfigNames;
-
 class FeedSanitizer implements \MediaWiki\Hook\MediaWikiServicesHook {
 
 	/**
@@ -11,21 +9,21 @@ class FeedSanitizer implements \MediaWiki\Hook\MediaWikiServicesHook {
 	 * @inheritDoc
 	 */
 	public function onMediaWikiServices( $services ) {
-		$feeds = $services->getMainConfig()->get( MainConfigNames::RCFeeds );
-		if ( !$feeds ) {
+		global $wgRCFeeds;
+		if ( !$wgRCFeeds ) {
 			return;
 		}
 
-		foreach ( $feeds as $feedKey => $feed ) {
+		foreach ( $wgRCFeeds as $feedKey => $feed ) {
 			if ( strpos( $feedKey, 'discord' ) !== 0 ) {
 				continue;
 			}
-			if ( !isset( $feeds[$feedKey]['url'] ) ) {
+			if ( !isset( $wgRCFeeds[$feedKey]['url'] ) ) {
 				// Reads 'uri' which is a key for other RCFeedFormatters, like
 				// JSONRCFeedFormatter and IRCColourfulRCFeedFormatter as the fallback of 'url'.
 				// DiscordRCFeedEngine should read only 'url', but this makes it less confusing for the end user.
-				if ( isset( $feeds[$feedKey]['uri'] ) ) {
-					$feeds[$feedKey]['url'] = $feeds[$feedKey]['uri'];
+				if ( isset( $wgRCFeeds[$feedKey]['uri'] ) ) {
+					$wgRCFeeds[$feedKey]['url'] = $wgRCFeeds[$feedKey]['uri'];
 				} else {
 					continue;
 				}
@@ -37,7 +35,7 @@ class FeedSanitizer implements \MediaWiki\Hook\MediaWikiServicesHook {
 			];
 
 			self::initializeParameters(
-				$feeds[$feedKey],
+				$wgRCFeeds[$feedKey],
 				Constants::DEFAULT_RC_FEED_PARAMS,
 				$mergeParams,
 				Constants::RC_FEED_MUST_BE_ARRAY_PARAMS
