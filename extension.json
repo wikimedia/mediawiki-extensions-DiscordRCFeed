@@ -1,6 +1,6 @@
 {
 	"name": "DiscordRCFeed",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"author": [ "Aleksi Postari", "[https://femiwiki.com/ FemiWiki Team]", "..." ],
 	"url": "https://www.mediawiki.org/wiki/Extension:DiscordRCFeed",
 	"descriptionmsg": "discordrcfeed-desc",
