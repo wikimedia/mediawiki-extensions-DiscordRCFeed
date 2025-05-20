@@ -8,6 +8,7 @@ use IContextSource;
 use MediaWiki\MediaWikiServices;
 use RecentChange;
 use Sanitizer;
+use Wikimedia\Message\ScalarParam;
 
 class FlowDiscordFormatter extends \Flow\Formatter\ChangesListFormatter {
 
@@ -76,19 +77,21 @@ class FlowDiscordFormatter extends \Flow\Formatter\ChangesListFormatter {
 		];
 		foreach ( $keyMap as $target => $sources ) {
 			if ( isset( $properties[$target] ) ) {
-				$this->i18nProperties[$target] = $properties[$target]['plaintext'] ?? $properties[$target];
+				$property = $properties[$target];
+				$this->i18nProperties[$target] = $this->resolveArrayParam( $property, 'plaintext' ) ?: $property;
 				unset( $properties[$target] );
 			}
 			foreach ( $sources as $src ) {
 				if ( isset( $properties[$src] ) ) {
-					$this->i18nProperties[$target] = $properties[$src]['plaintext'] ?? $properties[$src];
+					$property = $properties[$src];
+					$this->i18nProperties[$target] = $this->resolveArrayParam( $property, 'plaintext' ) ?: $property;
 					unset( $properties[$src] );
 				}
 			}
 		}
 
 		foreach ( $properties as $k => $v ) {
-			$this->i18nProperties[$k] = $v['plaintext'] ?? $v;
+			$this->i18nProperties[$k] = $this->resolveStringParam( $this->resolveArrayParam( $v, 'plaintext' ) ) ?: $v;
 		}
 	}
 
@@ -97,20 +100,32 @@ class FlowDiscordFormatter extends \Flow\Formatter\ChangesListFormatter {
 	 * @return array
 	 */
 	private function modifyData( $data ): array {
+		$properties = $data['properties'];
 		// The summary should not be included in the main line, because it should be accessed by
 		// self::getI18nProperty( 'summary' ).
 		foreach ( [
 			'summary',
 			'moderated-reason',
 		] as $key ) {
-			if ( isset( $data['properties'][$key] ) && isset( $data['properties'][$key]['plaintext'] ) ) {
-				$data['properties'][$key]['plaintext'] = '';
+			if ( isset( $properties[$key] ) ) {
+				if ( is_array( $properties[$key] ) && isset( $properties[$key]['plaintext'] ) ) {
+					$data['properties'][$key]['plaintext'] = '';
+				} elseif ( $properties[$key] instanceof ScalarParam ) {
+					// Note: ScalarParam::toJsonArray() is a protected function before MediaWiki 1.44
+					$jsonArray = [
+						$properties[$key]->getType() => $properties[$key]->getValue()
+					];
+					if ( in_array( 'plaintext', $jsonArray ) ) {
+						$jsonArray['plaintext'] = '';
+						$data['properties'][$key] = ScalarParam::newFromJsonArray( $jsonArray );
+					}
+				}
 			}
 		}
 
 		// Replace user links(user text + links) with user text. We add our own user links.
 		if ( $this->plaintext ) {
-			$data['properties']['user-links'] = $data['properties']['user-text'];
+			$data['properties']['user-links'] = $properties['user-text'];
 		}
 
 		return $data;
@@ -121,7 +136,36 @@ class FlowDiscordFormatter extends \Flow\Formatter\ChangesListFormatter {
 	 * @return string
 	 */
 	public function getI18nProperty( string $key ): string {
-		return $this->i18nProperties[$key] ?? '';
+		$property = $this->resolveArrayParam( $this->i18nProperties, $key );
+		return $this->resolveStringParam( $property ) ?: '';
+	}
+
+	/**
+	 * @param array|ScalarParam|null $obj
+	 * @param string $key
+	 */
+	private function resolveArrayParam( mixed $obj, string $key ): mixed {
+		if ( is_array( $obj ) && in_array( $key, $obj ) ) {
+			return $obj[$key];
+		} elseif ( $obj instanceof ScalarParam ) {
+			return $this->resolveArrayParam( $obj->getValue(), $key );
+		}
+		return null;
+	}
+
+	/**
+	 * @param string|ScalarParam|null $obj
+	 */
+	private function resolveStringParam( mixed $obj ): ?string {
+		if ( is_string( $obj ) ) {
+			return $obj;
+		} elseif ( $obj instanceof ScalarParam ) {
+			$value = $obj->getValue();
+			if ( is_string( $value ) ) {
+				return $value;
+			}
+		}
+		return null;
 	}
 
 	/**
