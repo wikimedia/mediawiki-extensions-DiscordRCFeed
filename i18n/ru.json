@@ -1,9 +1,24 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vlad5250"
+			"Vlad5250",
+			"Engineer56"
 		]
 	},
 	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|сделал|сделала}} малую правку в статье $3",
-	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|сделал|сделала}} малую правку в статье $3"
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|сделал|сделала}} малую правку в статье $3",
+	"discordrcfeed-emoji-edit": "📝",
+	"discordrcfeed-emoji-edit-minor": "✏️",
+	"discordrcfeed-emoji-edit-bot": "🤖",
+	"discordrcfeed-emoji-edit-minor-bot": "🤖",
+	"discordrcfeed-emoji-log": "🗒️",
+	"discordrcfeed-emoji-log-newusers": "👋",
+	"discordrcfeed-emoji-log-create-create": "🆕",
+	"discordrcfeed-emoji-log-upload": "📤",
+	"discordrcfeed-emoji-log-move": "➡",
+	"discordrcfeed-emoji-log-protect": "🔒",
+	"discordrcfeed-emoji-log-protect-unprotect": "🔓",
+	"discordrcfeed-emoji-log-delete": "❌",
+	"discordrcfeed-emoji-log-delete-restore": "🔙",
+	"discordrcfeed-emoji-flow-restore-post": "🔓"
 }
