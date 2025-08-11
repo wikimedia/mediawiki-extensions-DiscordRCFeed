@@ -23,6 +23,7 @@ class FeedSanitizer implements \MediaWiki\Hook\MediaWikiServicesHook {
 				// JSONRCFeedFormatter and IRCColourfulRCFeedFormatter as the fallback of 'url'.
 				// DiscordRCFeedEngine should read only 'url', but this makes it less confusing for the end user.
 				if ( isset( $wgRCFeeds[$feedKey]['uri'] ) ) {
+					// @phan-suppress-next-line PhanTypeInvalidDimOffset
 					$wgRCFeeds[$feedKey]['url'] = $wgRCFeeds[$feedKey]['uri'];
 				} else {
 					continue;
