@@ -113,7 +113,7 @@ class FlowDiscordFormatter extends \Flow\Formatter\ChangesListFormatter {
 				} elseif ( $properties[$key] instanceof ScalarParam ) {
 					// Note: ScalarParam::toJsonArray() is a protected function before MediaWiki 1.44
 					$jsonArray = [
-						$properties[$key]->getType() => $properties[$key]->getValue()
+						$properties[$key]->getType()->value => $properties[$key]->getValue()
 					];
 					if ( in_array( 'plaintext', $jsonArray ) ) {
 						$jsonArray['plaintext'] = '';

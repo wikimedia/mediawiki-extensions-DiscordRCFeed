@@ -2,6 +2,7 @@
 namespace MediaWiki\Extension\DiscordRCFeed;
 
 use ExtensionRegistry;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use Sanitizer;
 use User;
@@ -121,9 +122,10 @@ class HtmlToDiscordConverter {
 	 */
 	private function convertLinks( string $text ): string {
 		if ( preg_match_all( self::REGEX_FOR_GENERAL_LINK, $text, $matches ) ) {
+			$urlUtils = MediaWikiServices::getInstance()->getUrlUtils();
 			foreach ( $matches[0] as $i => $fullMatch ) {
 				$url = $matches[1][$i];
-				$url = Util::urlIsLocal( $url ) ? wfExpandUrl( $url ) : '';
+				$url = Util::urlIsLocal( $url ) ? $urlUtils->expand( $url ) : '';
 				$label = $matches[2][$i];
 
 				$link = DiscordLinker::makeLink( $url, $label );

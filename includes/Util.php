@@ -46,15 +46,17 @@ final class Util {
 	 * @return bool
 	 */
 	public static function urlIsLocal( string $url ): bool {
-		$config = MediaWikiServices::getInstance()->getMainConfig();
-		$server = wfParseUrl( $config->get( MainConfigNames::Server ) );
-		$url = wfParseUrl( $url );
+		$services = MediaWikiServices::getInstance();
+		$urlUtils = $services->getUrlUtils();
+		$server = $urlUtils->parse( $services->getMainConfig()->get( MainConfigNames::Server ) );
+		$url = $urlUtils->parse( $url );
 		$bitNames = [
 			'scheme',
 			'host',
 			'port',
 		];
 		foreach ( $bitNames as $name ) {
+			// @phan-suppress-next-line PhanTypeArraySuspiciousNullable
 			if ( isset( $url[$name] ) && $server[$name] !== $url[$name] ) {
 				return false;
 			}
@@ -63,7 +65,6 @@ final class Util {
 	}
 
 	/**
-	 *
 	 * get a context which has the content language to prevent the message shown in an arbitrary language the editor
 	 * uses.
 	 * https://github.com/femiwiki/DiscordRCFeed/issues/6
