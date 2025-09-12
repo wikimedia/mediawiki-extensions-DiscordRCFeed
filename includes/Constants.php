@@ -1,6 +1,8 @@
 <?php
 namespace MediaWiki\Extension\DiscordRCFeed;
 
+use MediaWiki\RecentChanges\RecentChange;
+
 final class Constants {
 	public const DEFAULT_RC_FEED_PARAMS = [
 		'formatter' => DiscordRCFeedFormatter::class,
@@ -45,8 +47,8 @@ final class Constants {
 	public const RC_FEED_MUST_BE_ARRAY_PARAMS = [
 		'omit_namespaces',
 		'only_namespaces',
-		'omit_types',
-		'only_types',
+		'omit_sources',
+		'only_sources',
 		'omit_log_types',
 		'only_log_types',
 		'omit_log_actions',
@@ -70,9 +72,9 @@ final class Constants {
 	public const COLOR_DEFAULT = self::COLOR_GRAY;
 
 	public const COLOR_MAP_ACTION = [
-		RC_EDIT => self::COLOR_GREEN,
-		RC_NEW  => self::COLOR_BLUE,
-		RC_LOG  => self::COLOR_GREEN,
+		RecentChange::SRC_EDIT => self::COLOR_GREEN,
+		RecentChange::SRC_NEW  => self::COLOR_BLUE,
+		RecentChange::SRC_LOG  => self::COLOR_GREEN,
 	];
 
 	public const COLOR_MAP_LOG = [

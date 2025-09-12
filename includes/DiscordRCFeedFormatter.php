@@ -3,14 +3,15 @@
 namespace MediaWiki\Extension\DiscordRCFeed;
 
 use FatalError;
+use Flow\Data\Listener\RecentChangesListener;
 use LogFormatter;
 use LogFormatterFactory;
 use MediaWiki\MainConfigNames;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWiki\Title\Title;
 use Message;
 use RCFeedFormatter;
-use RecentChange;
 use User;
 
 class DiscordRCFeedFormatter implements RCFeedFormatter {
@@ -83,9 +84,9 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 	public function getLine( array $feed, RecentChange $rc, $actionComment ) {
 		$this->initialize( $feed, Util::getPerformerFromRC( $rc ), Util::getTitleFromRC( $rc ) );
 		$attribs = $rc->getAttributes();
-		$rcType = $attribs['rc_type'];
+		$rcSource = $attribs['rc_source'];
 
-		if ( self::isFlowLoaded() && $rcType == RC_FLOW ) {
+		if ( self::isFlowLoaded() && $rcSource == RecentChangesListener::SRC_FLOW ) {
 			$plaintext = $this->style == self::STYLE_STRUCTURE;
 			$this->flowFormatter = new FlowDiscordFormatter( $rc, $this->converter, $plaintext );
 		}
@@ -94,14 +95,15 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 
 		$services = MediaWikiServices::getInstance();
 
-		if ( in_array( $rcType, [ RC_EDIT, RC_NEW ] ) ) {
-			$color = Constants::COLOR_MAP_ACTION[$rcType] ?? Constants::COLOR_DEFAULT;
+		if ( in_array( $rcSource, [ RecentChange::SRC_EDIT, RecentChange::SRC_NEW ] ) ) {
+			$color = Constants::COLOR_MAP_ACTION[$rcSource] ?? Constants::COLOR_DEFAULT;
 			$store = $services->getCommentStore();
 			$comment = $store->getComment( 'rc_comment', $attribs )->text;
-		} elseif ( $rcType == RC_LOG ) {
-			$color = Constants::COLOR_MAP_LOG[$attribs['rc_log_type']] ?? Constants::COLOR_MAP_ACTION[RC_LOG];
+		} elseif ( $rcSource == RecentChange::SRC_LOG ) {
+			$color = Constants::COLOR_MAP_LOG[$attribs['rc_log_type']]
+				?? Constants::COLOR_MAP_ACTION[RecentChange::SRC_LOG];
 			$comment = $attribs['rc_comment'];
-		} elseif ( self::isFlowLoaded() && $rcType == RC_FLOW ) {
+		} elseif ( self::isFlowLoaded() && $rcSource == RecentChangesListener::SRC_FLOW ) {
 			$color = Constants::COLOR_ACTION_FLOW;
 			$comment = $this->flowFormatter->getI18nProperty( 'summary' );
 		} else {
@@ -123,12 +125,12 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 	 */
 	private function getDescription( RecentChange $rc ): string {
 		$attribs = $rc->getAttributes();
-		$rcType = $attribs['rc_type'];
-		if ( in_array( $rcType, [ RC_EDIT, RC_NEW ] ) ) {
+		$rcSource = $attribs['rc_source'];
+		if ( in_array( $rcSource, [ RecentChange::SRC_EDIT, RecentChange::SRC_NEW ] ) ) {
 			$desc = $this->getEditDescription( $attribs );
-		} elseif ( $rcType == RC_LOG ) {
+		} elseif ( $rcSource == RecentChange::SRC_LOG ) {
 			$desc = $this->getLogDescription( $attribs );
-		} elseif ( self::isFlowLoaded() && $rcType == RC_FLOW ) {
+		} elseif ( self::isFlowLoaded() && $rcSource == RecentChangesListener::SRC_FLOW ) {
 			$desc = $this->getFlowDescription( $rc );
 		} else {
 			return '';
@@ -153,7 +155,7 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 			$flag .= '-bot';
 		}
 
-		if ( $attribs['rc_type'] == RC_NEW ) {
+		if ( $attribs['rc_source'] == RecentChange::SRC_NEW ) {
 			$emoji = Util::msgText( 'discordrcfeed-emoji-log-create-create' );
 			$desc = 'logentry-create-create';
 		} else {
@@ -282,7 +284,7 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 		if ( !isset( $attribs['rc_new_len'] ) || $attribs['rc_new_len'] === null ) {
 			return null;
 		}
-		if ( $attribs['rc_type'] == RC_NEW ||
+		if ( $attribs['rc_source'] == RecentChange::SRC_NEW ||
 			!isset( $attribs['rc_old_len'] ) || $attribs['rc_old_len'] === null ) {
 			// old length is missing. just return the formatted new length
 			$msg = ( new Message( 'nbytes' ) )->numParams( $attribs['rc_new_len'] );
@@ -377,7 +379,7 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 						];
 					}
 				}
-				if ( !self::isFlowLoaded() || $attribs['rc_type'] !== RC_FLOW ) {
+				if ( !self::isFlowLoaded() || $attribs['rc_source'] !== RecentChangesListener::SRC_FLOW ) {
 					if ( $title ) {
 						$tools = $this->linker->makePageTools( $title, null, true );
 						if ( $tools ) {

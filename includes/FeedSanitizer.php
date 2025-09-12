@@ -2,6 +2,8 @@
 
 namespace MediaWiki\Extension\DiscordRCFeed;
 
+use MediaWiki\RecentChanges\RecentChange;
+
 class FeedSanitizer implements \MediaWiki\Hook\MediaWikiServicesHook {
 
 	/**
@@ -30,9 +32,9 @@ class FeedSanitizer implements \MediaWiki\Hook\MediaWikiServicesHook {
 				}
 			}
 
-			// Don't send RC_CATEGORIZE events (same as T127360)
+			// Don't send SRC_CATEGORIZE events (same as T127360)
 			$mergeParams = [
-				'omit_types' => [ RC_CATEGORIZE ],
+				'omit_sources' => [ RecentChange::SRC_CATEGORIZE ],
 			];
 
 			self::initializeParameters(

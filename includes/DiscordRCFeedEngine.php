@@ -72,9 +72,9 @@ class DiscordRCFeedEngine extends FormattedRCFeed {
 			( $params['omit_talk'] && $isTalk ) ||
 			( $params['only_talk'] && !$isTalk ) ||
 
-			// RC type
-			in_array( $attribs['rc_type'], $params['omit_types'] ) ||
-			( $params['only_types'] && !in_array( $attribs['rc_type'], $params['only_types'] ) ) ||
+			// RC source
+			in_array( $attribs['rc_source'], $params['omit_sources'] ) ||
+			( $params['only_sources'] && !in_array( $attribs['rc_source'], $params['only_sources'] ) ) ||
 
 			// Namespaces
 			in_array( $attribs['rc_namespace'], $params['omit_namespaces'] ) ||

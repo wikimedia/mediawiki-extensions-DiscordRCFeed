@@ -153,7 +153,7 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 		$formatter = new DiscordRCFeedFormatter( $feed, $user, Title::newFromText( 'Dummy' ) );
 		$wrapper = TestingAccessWrapper::newFromObject( $formatter );
 		$actual = $wrapper->makePostData(
-			[ 'rc_type' => RC_EDIT ],
+			[ 'rc_source' => RecentChange::SRC_EDIT ],
 			0x0000ff,
 			'message',
 			'comment'
@@ -170,7 +170,7 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 				],
 				[],
 				[
-					'rc_type' => RC_NEW,
+					'rc_source' => RecentChange::SRC_NEW,
 				],
 			],
 			'should describe edit' => [
@@ -180,7 +180,7 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 				],
 				[],
 				[
-					'rc_type' => RC_EDIT,
+					'rc_source' => RecentChange::SRC_EDIT,
 				],
 			],
 			'should describe edit with the structure style' => [
@@ -192,7 +192,7 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 					'style' => DiscordRCFeedFormatter::STYLE_STRUCTURE,
 				],
 				[
-					'rc_type' => RC_EDIT,
+					'rc_source' => RecentChange::SRC_EDIT,
 				],
 			],
 			'should describe minor edit' => [
@@ -202,7 +202,7 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 				],
 				[],
 				[
-					'rc_type' => RC_EDIT,
+					'rc_source' => RecentChange::SRC_EDIT,
 					'rc_minor' => true,
 				],
 			],
@@ -213,7 +213,7 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 				],
 				[],
 				[
-					'rc_type' => RC_EDIT,
+					'rc_source' => RecentChange::SRC_EDIT,
 					'rc_bot' => true,
 				],
 			],
@@ -224,7 +224,7 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 				],
 				[],
 				[
-					'rc_type' => RC_EDIT,
+					'rc_source' => RecentChange::SRC_EDIT,
 					'rc_minor' => true,
 					'rc_bot' => true,
 				],
@@ -237,7 +237,7 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 			// 	],
 			// 	[],
 			// 	[
-			// 		'rc_type' => RC_LOG,
+			// 		'rc_source' => RecentChange::SRC_LOG,
 			// 		'rc_log_type' => 'move',
 			// 		'rc_log_action' => 'move',
 			// 	],
@@ -360,12 +360,12 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 			'should return size if the old length is not provided' => [
 				'(30 bytes)',
 				$embed,
-				[ RC_NEW, 30 ],
+				[ RecentChange::SRC_NEW, 30 ],
 			],
 			'should return size and diff if the old length is provided' => [
 				'30 bytes (+10)',
 				$structure,
-				[ RC_EDIT, 30, 20 ],
+				[ RecentChange::SRC_EDIT, 30, 20 ],
 			],
 		];
 	}
@@ -385,7 +385,7 @@ class DiscordRCFeedFormatterTest extends MediaWikiIntegrationTestCase {
 		$formatter = new DiscordRCFeedFormatter( $feed, $user, $title );
 		$wrapper = TestingAccessWrapper::newFromObject( $formatter );
 		$actual = $wrapper->getSizeDiff( [
-			'rc_type' => $params[0],
+			'rc_source' => $params[0],
 			'rc_new_len' => $params[1],
 			'rc_old_len' => $params[2] ?? null,
 		] );

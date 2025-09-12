@@ -32,10 +32,10 @@ class DiscordRCFeedEngineTest extends MediaWikiIntegrationTestCase {
 					'rc_namespace' => NS_TALK,
 				],
 			],
-			'should omit RC_CATEGORIZE change always' => [
+			'should omit SRC_CATEGORIZE change always' => [
 				[],
 				[
-					'rc_type' => RC_CATEGORIZE,
+					'rc_source' => RecentChange::SRC_CATEGORIZE,
 				],
 			],
 			'should omit the given log types' => [
@@ -43,7 +43,7 @@ class DiscordRCFeedEngineTest extends MediaWikiIntegrationTestCase {
 					'omit_log_types' => 'patrol',
 				],
 				[
-					'rc_type' => RC_LOG,
+					'rc_source' => RecentChange::SRC_LOG,
 					'rc_log_type' => 'patrol',
 					'rc_log_action' => 'patrol',
 				],
@@ -54,7 +54,7 @@ class DiscordRCFeedEngineTest extends MediaWikiIntegrationTestCase {
 				],
 				[
 					'rc_user_text' => 'Dummy',
-					'rc_type' => RC_LOG,
+					'rc_source' => RecentChange::SRC_LOG,
 					'rc_log_type' => 'patrol',
 					'rc_log_action' => 'patrol-auto',
 				],
@@ -65,7 +65,7 @@ class DiscordRCFeedEngineTest extends MediaWikiIntegrationTestCase {
 				],
 				[
 					'rc_user_text' => 'Dummy',
-					'rc_type' => RC_EDIT,
+					'rc_source' => RecentChange::SRC_EDIT,
 					'rc_namespace' => NS_MAIN,
 					'rc_title' => 'Main_page',
 				],
@@ -82,14 +82,14 @@ class DiscordRCFeedEngineTest extends MediaWikiIntegrationTestCase {
 		$attribs = array_replace_recursive( [
 			'rc_namespace' => NS_MAIN,
 			'rc_title' => 'Test page',
-			'rc_type' => RC_EDIT,
+			'rc_source' => RecentChange::SRC_EDIT,
 		], $attribs );
 		FeedSanitizer::initializeParameters(
 			$feed,
 			Constants::DEFAULT_RC_FEED_PARAMS + [
 				'url' => 'https://example.webhook/',
 			],
-			[ 'omit_types' => [ RC_CATEGORIZE ] ],
+			[ 'omit_sources' => [ RecentChange::SRC_CATEGORIZE ] ],
 			Constants::RC_FEED_MUST_BE_ARRAY_PARAMS
 		);
 

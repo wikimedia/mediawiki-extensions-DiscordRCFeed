@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\DiscordRCFeed\Tests\Unit;
 
 use MediaWiki\Extension\DiscordRCFeed\FeedSanitizer;
+use MediaWiki\RecentChanges\RecentChange;
 use MediaWikiUnitTestCase;
 
 /**
@@ -17,7 +18,7 @@ class FeedSanitizerTest extends MediaWikiUnitTestCase {
 			'should provide must-be-array parameters' => [
 				[
 					'omit_namespaces' => [],
-					'omit_types' => [],
+					'omit_sources' => [],
 				],
 				[
 					[],
@@ -25,43 +26,43 @@ class FeedSanitizerTest extends MediaWikiUnitTestCase {
 					null,
 					[
 						'omit_namespaces',
-						'omit_types',
+						'omit_sources',
 					],
 				],
 			],
 			'should merge when the input is empty' => [
 				[
 					'omit_namespaces' => [],
-					'omit_types' => [ 5 ],
+					'omit_sources' => [ RecentChange::SRC_CATEGORIZE ],
 				],
 				[
 					[],
 					null,
 					[
-						'omit_types' => [ 5 ],
+						'omit_sources' => [ RecentChange::SRC_CATEGORIZE ],
 					],
 					[
 						'omit_namespaces',
-						'omit_types',
+						'omit_sources',
 					],
 				],
 			],
 			'should merge when the input is not empty' => [
 				[
 					'omit_namespaces' => [],
-					'omit_types' => [ 0, 5 ],
+					'omit_sources' => [ RecentChange::SRC_EDIT, RecentChange::SRC_CATEGORIZE ],
 				],
 				[
 					[
-						'omit_types' => [ 0 ],
+						'omit_sources' => [ RecentChange::SRC_EDIT ],
 					],
 					null,
 					[
-						'omit_types' => [ 5 ],
+						'omit_sources' => [ RecentChange::SRC_CATEGORIZE ],
 					],
 					[
 						'omit_namespaces',
-						'omit_types',
+						'omit_sources',
 					],
 				],
 			],
@@ -104,24 +105,24 @@ class FeedSanitizerTest extends MediaWikiUnitTestCase {
 			'replacement and merging should be done in the same time' => [
 				[
 					'omit_namespaces' => [],
-					'omit_types' => [ 3, 5 ],
+					'omit_sources' => [ RecentChange::SRC_LOG, RecentChange::SRC_CATEGORIZE ],
 					'omit_log_types' => [ 'protect' ],
 					'omit_log_actions' => [],
 				],
 				[
 					[
-						'omit_types' => [ 3 ],
+						'omit_sources' => [ RecentChange::SRC_LOG ],
 						'omit_log_types' => [ 'protect' ],
 					],
 					[
 						'omit_log_types' => [ 'patrol' ],
 					],
 					[
-						'omit_types' => [ 5 ],
+						'omit_sources' => [ RecentChange::SRC_CATEGORIZE ],
 					],
 					[
 						'omit_namespaces',
-						'omit_types',
+						'omit_sources',
 						'omit_log_types',
 						'omit_log_actions',
 					],
@@ -130,7 +131,7 @@ class FeedSanitizerTest extends MediaWikiUnitTestCase {
 			// https://github.com/femiwiki/DiscordRCFeed/issues/32
 			'should not mix the default array and the given array' => [
 				[
-					'omit_types' => [ RC_CATEGORIZE ],
+					'omit_sources' => [ RecentChange::SRC_CATEGORIZE ],
 					'page_tools' => [
 						[
 							'query' => 'action=edit',
@@ -180,7 +181,7 @@ class FeedSanitizerTest extends MediaWikiUnitTestCase {
 						],
 					],
 					[
-						'omit_types' => [ RC_CATEGORIZE ],
+						'omit_sources' => [ RecentChange::SRC_CATEGORIZE ],
 					],
 				]
 			]
