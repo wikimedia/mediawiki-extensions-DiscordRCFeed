@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"StarrySky"
+			"StarrySky",
+			"GuoPC"
 		]
 	},
-	"discordrcfeed-desc": "为 Discord 提供 RCFeedEngine 和 RCFeedFormatter。",
-	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|made}} 对文章 $3 的小修改",
-	"discordrcfeed-line-edit": "$1{{GENDER:$2|编辑}}了回复$3"
+	"discordrcfeed-desc": "提供适用于Discord的RCFeedEngine和RCFeedFormatter。",
+	"discordrcfeed-line-edit-minor": "$1{{GENDER:$2|已对}}条目$3做了小修改",
+	"discordrcfeed-line-edit": "$1{{GENDER:$2|已编辑}}条目$3",
+	"discordrcfeed-line-edit-minor-bot": "$1{{GENDER:$2|已对}}条目$3做了小修改",
+	"discordrcfeed-line-edit-bot": "$1{{GENDER:$2|已对}}条目$3做了小修改"
 }
