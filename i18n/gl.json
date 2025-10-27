@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"discordrcfeed-desc": "Proporciona RCFeedEngine e RCFeedFormatter para Discord.",
+	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|fixo}} unha edición pequena no artigo «$3»",
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|editou}} o artigo «$3»",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|fixo}} unha edición pequena no artigo «$3»",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|fixo}} unha edición pequena no artigo «$3»"
+}
