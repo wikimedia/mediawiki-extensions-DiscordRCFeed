@@ -2,10 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Sabelöga",
-			"WikiPhoenix"
+			"WikiPhoenix",
+			"Stefan2255"
 		]
 	},
 	"discordrcfeed-desc": "Tillhandahåller RCFeedEngine och RCFeedFormatter för Discord.",
 	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|gjorde}} en mindre redigering på artikeln $3",
-	"discordrcfeed-line-edit": "$1 {{GENDER:$2|redigerade}} artikeln $3"
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|redigerade}} artikeln $3",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|gjorde}} en mindre redigering på artikeln $3",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|gjorde}} en mindre redigering på artikeln $3"
 }
