@@ -52,7 +52,6 @@ class DiscordRCFeedEngine extends FormattedRCFeed {
 
 	/**
 	 * @inheritDoc
-	 * @suppress PhanTypePossiblyInvalidDimOffset $params is already sanitized on FeedSanitizer.
 	 */
 	public function notify( RecentChange $rc, $actionComment = null ) {
 		$params = $this->params;
