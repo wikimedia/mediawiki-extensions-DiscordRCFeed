@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
 	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|huet}} eng kleng Ännerung um Artikel $3 gemaach op",
-	"discordrcfeed-line-edit": "$1 {{GENDER:$2|huet}} den Artikel $3 geännert"
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|huet}} den Artikel $3 geännert",
+	"discordrcfeed-line-edit-minor-bot": "{{GENDER:$2|De(n) $1|D'$1}} huet eng kleng Ännerung um Artikel $3 gemaach",
+	"discordrcfeed-line-edit-bot": "{{GENDER:$2|De(n) $1|D'$1}} huet eng kleng Ännerung um Artikel $3 gemaach"
 }
