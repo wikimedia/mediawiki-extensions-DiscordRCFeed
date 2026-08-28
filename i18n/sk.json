@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"discordrcfeed-desc": "Poskytuje RCFeedEngine a RCFeedFormatter pre Discord.",
+	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|vykonal|vykonala}} malú úpravu článku $3",
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|upravil|upravila}} článok $3",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|vykonal|vykonala}} malú úpravu článku $3",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|vykonal|vykonala}} malú úpravu článku $3"
+}
