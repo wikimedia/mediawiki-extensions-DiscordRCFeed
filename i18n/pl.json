@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ostrzyciel"
+			"Ostrzyciel",
+			"PanWor"
 		]
 	},
 	"discordrcfeed-desc": "Pozwala na publikowanie listy ostatnich zmian na Discordzie.",
-	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|wykonał|wykonała}} drobną edycję w artykule $3",
-	"discordrcfeed-line-edit": "$1 {{GENDER:$2|wykonał|wykonała}} zmianę w artykule $3"
+	"discordrcfeed-line-edit-minor": "$1 {{GENDER:$2|wykonał|wykonała|wykonał(a)}} drobną edycję w artykule „$3”",
+	"discordrcfeed-line-edit": "$1 {{GENDER:$2|wykonał|wykonała|wykonał(a)}} zmianę w artykule „$3”",
+	"discordrcfeed-line-edit-minor-bot": "$1 {{GENDER:$2|wykonał|wykonała|wykonał(a)}} drobną edycję w artykule „$3”",
+	"discordrcfeed-line-edit-bot": "$1 {{GENDER:$2|wykonał|wykonała|wykonał(a)}} zmianę w artykule „$3”"
 }
