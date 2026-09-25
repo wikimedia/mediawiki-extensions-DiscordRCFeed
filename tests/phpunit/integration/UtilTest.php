@@ -61,6 +61,14 @@ class UtilTest extends MediaWikiIntegrationTestCase {
 	}
 
 	/**
+	 * @covers \MediaWiki\Extension\DiscordRCFeed\Util::escapeColons
+	 */
+	public function testEscapeColons() {
+		$this->assertSame( '2001\:db8\:100\:1', Util::escapeColons( '2001:db8:100:1' ) );
+		$this->assertSame( 'Foo', Util::escapeColons( 'Foo' ) );
+	}
+
+	/**
 	 * @covers \MediaWiki\Extension\DiscordRCFeed\Util::getContentLanguageContext
 	 */
 	public function testGetContentLanguageContext() {

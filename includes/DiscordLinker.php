@@ -5,6 +5,7 @@ use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use SpecialPage;
 use User;
+use Wikimedia\IPUtils;
 
 class DiscordLinker {
 	/** @var array */
@@ -123,7 +124,14 @@ class DiscordLinker {
 	 * @return string
 	 */
 	public function makeUserTextWithTools( User $user ): string {
-		$rt = self::makeLink( $user->getUserPage()->getFullURL( '', false, PROTO_CURRENT ), $user->getName() );
+		$name = $user->getName();
+		// Discord renders ':100:' in an IPv6 address as an emoji, even inside link text
+		// where backslash escapes are shown as is.
+		// https://github.com/femiwiki/DiscordRCFeed/issues/103
+		if ( IPUtils::isIPAddress( $name ) ) {
+			$name = "`$name`";
+		}
+		$rt = self::makeLink( $user->getUserPage()->getFullURL( '', false, PROTO_CURRENT ), $name );
 		if ( $this->userTools ) {
 			$tools = $this->makeUserTools( $user );
 			if ( !$tools ) {
