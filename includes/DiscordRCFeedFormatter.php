@@ -195,6 +195,9 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 			];
 		}
 		$desc = $desc->params( ...$params )->inContentLanguage()->text();
+		if ( $this->style == self::STYLE_STRUCTURE ) {
+			$desc = Util::escapeColons( $desc );
+		}
 		return "$emoji $desc";
 	}
 
@@ -232,6 +235,7 @@ class DiscordRCFeedFormatter implements RCFeedFormatter {
 			$desc = $formatter->getPlainActionText();
 			// Replace square brackets that even the plain action text includes.
 			$desc = str_replace( [ '[[', ']]' ], '"', $desc );
+			$desc = Util::escapeColons( $desc );
 		} else {
 			$desc = $formatter->getActionText();
 			$desc = $this->converter->convert( $desc );
