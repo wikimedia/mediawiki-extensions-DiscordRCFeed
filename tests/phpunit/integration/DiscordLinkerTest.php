@@ -117,6 +117,23 @@ class DiscordLinkerTest extends MediaWikiIntegrationTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
+	/**
+	 * @covers \MediaWiki\Extension\DiscordRCFeed\DiscordLinker::makeUserTextWithTools
+	 */
+	public function testMakeUserTextWithToolsForIP() {
+		$this->overrideConfigValues( [
+			MainConfigNames::Server => 'https://foo.bar',
+			MainConfigNames::ArticlePath => '/index.php/$1',
+		] );
+		$user = $this->getServiceContainer()->getUserFactory()->newAnonymous( '2001:DB8:100:0:0:0:0:1' );
+		$actual = ( new DiscordLinker() )->makeUserTextWithTools( $user );
+		$this->assertSame(
+			'[`2001:DB8:100:0:0:0:0:1`](https://foo.bar/index.php/User:2001:DB8:100:0:0:0:0:1)',
+			$actual,
+			'should wrap an IP address in code so that Discord does not render it as an emoji'
+		);
+	}
+
 	public static function providerUserTools() {
 		return [
 			'should render link to user page' => [

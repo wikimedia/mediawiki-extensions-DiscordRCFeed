@@ -42,6 +42,17 @@ final class Util {
 	}
 
 	/**
+	 * Escapes colons so that Discord does not render something like ':100:' as an emoji.
+	 * This works only on plain text. Inside link text Discord shows the backslashes.
+	 * https://github.com/femiwiki/DiscordRCFeed/issues/103
+	 * @param string $text
+	 * @return string
+	 */
+	public static function escapeColons( string $text ): string {
+		return str_replace( ':', '\:', $text );
+	}
+
+	/**
 	 * @param string $url
 	 * @return bool
 	 */
